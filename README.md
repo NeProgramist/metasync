@@ -301,6 +301,70 @@ Asynchronous some (iterate in series)
 
 Non-blocking synchronous map
 
+### class AsyncEmitter
+
+#### AsyncEmitter.prototype.constructor()
+
+#### AsyncEmitter.prototype.on(name, fn)
+
+- `name`: [`<string>`][string] event name
+- `fn`: [`<Function>`][function] listener
+
+Add listener
+
+#### AsyncEmitter.prototype.once(name, fn)
+
+- `name`: [`<string>`][string] event name
+- `fn`: [`<Function>`][function] listener
+
+_Returns:_ [`<Promise>`][promise]|[`<undefined>`][undefined]
+
+Add listener
+
+#### async AsyncEmitter.prototype.emit(name, args)
+
+- `name`: [`<string>`][string] event name
+- `args`: `<any[]>`
+
+_Returns:_ [`<Promise>`][promise]|[`<undefined>`][undefined]
+
+Emit event
+
+#### AsyncEmitter.prototype.remove(name, fn)
+
+- `name`: [`<string>`][string] event name
+- `fn`: [`<Function>`][function] listener to remove
+
+Remove event listener
+
+#### AsyncEmitter.prototype.clear(name)
+
+- `name`: [`<string>`][string] event name
+
+Remove all listeners or by name
+
+#### AsyncEmitter.prototype.count(name)
+
+- `name`: [`<string>`][string] event name
+
+_Returns:_ [`<number>`][number]
+
+Get listeners count by event name
+
+#### AsyncEmitter.prototype.listeners(name)
+
+- `name`: [`<string>`][string] event name
+
+_Returns:_ [`<Function[]>`][function]
+
+Get listeners array by event name
+
+#### AsyncEmitter.prototype.names()
+
+_Returns:_ [`<string[]>`][string] names
+
+Get events name array
+
 ### asyncIter(base)
 
 - `base`: [`<Iterable>`][iterable]|[`<AsyncIterable>`][asynciterable] an
@@ -925,6 +989,7 @@ Set timeout for asynchronous function execution
 [error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [boolean]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type
 [null]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type
+[undefined]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Undefined_type
 [number]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type
 [string]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type
 [iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
