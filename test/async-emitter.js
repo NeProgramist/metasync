@@ -15,12 +15,10 @@ metatests.test('AsyncEmitter on/emit', async test => {
 
   ae.on('e1', fn);
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 1);
 
   await ae.emit('e1', 1, 2, 3, 4);
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 1);
 
   test.end();
@@ -32,13 +30,11 @@ metatests.test('AsyncEmitter once', async test => {
   ae.once('e1', test.mustCall());
   ae.once('e1', test.mustCall());
 
-  test.strictSame(ae.wrappers.size, 2);
   test.strictSame(ae.names().length, 1);
 
   ae.emit('e1');
   ae.emit('e1');
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 0);
 
   test.end();
@@ -48,7 +44,6 @@ metatests.test('AsyncEmitter await once', async test => {
   const ae = new AsyncEmitter();
 
   const fn = test.mustCall(() => {
-    test.strictSame(ae.wrappers.size, 1);
     test.strictSame(ae.names().length, 1);
     ae.emit('e1');
   });
@@ -56,7 +51,6 @@ metatests.test('AsyncEmitter await once', async test => {
   setTimeout(fn, 0);
   await ae.once('e1');
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 0);
 
   test.end();
@@ -71,7 +65,6 @@ metatests.test('AsyncEmitter on/once/emit', async test => {
   ae.once('e1', fn);
   ae.emit('e1');
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 1);
   test.strictSame(ae.listeners('e1').length, 1);
 
@@ -90,7 +83,6 @@ metatests.test('AsyncEmitter remove', async test => {
   ae.remove('e1', fn);
   ae.emit('e1');
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 0);
 
   ae.remove('e1', fn);
@@ -107,12 +99,10 @@ metatests.test('AsyncEmitter remove once', async test => {
   ae.on('e1', fn);
   ae.once('e1', fn);
 
-  test.strictSame(ae.wrappers.size, 1);
   test.strictSame(ae.names().length, 1);
 
   ae.remove('e1', fn);
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 0);
 
   test.end();
@@ -127,7 +117,6 @@ metatests.test('AsyncEmitter on/once/remove different', async test => {
   ae.once('e1', fn);
   ae.remove('e1', fn);
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 0);
   test.strictSame(ae.listeners('e1').length, 1);
 
@@ -143,7 +132,6 @@ metatests.test('AsyncEmitter on/once/remove different', async test => {
   ae.once('e2', fn);
   ae.remove('e1', fn);
 
-  test.strictSame(ae.wrappers.size, 1);
   test.strictSame(ae.names().length, 1);
   test.strictSame(ae.listeners('e2').length, 1);
 
@@ -169,7 +157,6 @@ metatests.test('AsyncEmitter clear all', async test => {
   ae.clear();
   ae.emit('e1');
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 0);
 
   test.end();
@@ -183,7 +170,6 @@ metatests.test('AsyncEmitter clear by name', async test => {
   ae.clear('e2');
   ae.emit('e1');
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 0);
 
   test.end();
@@ -195,17 +181,14 @@ metatests.test('AsyncEmitter clear once', async test => {
   ae.once('e1', test.mustNotCall());
   ae.once('e2', test.mustNotCall());
 
-  test.strictSame(ae.wrappers.size, 2);
   test.strictSame(ae.names().length, 2);
 
   ae.clear('e1');
 
-  test.strictSame(ae.wrappers.size, 1);
   test.strictSame(ae.names().length, 1);
 
   ae.emit('e1');
 
-  test.strictSame(ae.wrappers.size, 1);
   test.strictSame(ae.names().length, 1);
 
   test.end();
@@ -221,7 +204,6 @@ metatests.test('AsyncEmitter names', async test => {
 
   test.strictSame(ae.names(), ['e1', 'e2', 'e3']);
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 3);
 
   test.end();
@@ -259,7 +241,6 @@ metatests.test('AsyncEmitter await multiple listeners', async test => {
 
   await ae.emit('e1');
 
-  test.strictSame(ae.wrappers.size, 0);
   test.strictSame(ae.names().length, 1);
 
   test.end();
